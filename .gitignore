@@ -4,4 +4,4 @@
 /debug/
 /release/
 
-.vcxproj.*
+*.vcxproj.*
