@@ -1,5 +1,12 @@
 #include "game.h"
 
+#if _DEBUG
+#include <iostream>
+#endif
+
+#include <thread>
+#include <chrono>
+
 Game::Game()
 {
     _window = new sf::RenderWindow(sf::VideoMode(1024, 768), "Pong");
@@ -20,17 +27,21 @@ Game::~Game()
 
 void Game::init()
 {
+    
     // create ball
     _ball = new Ball(10.f);
 
-    _ball->setPosition(50, 50);
-    _ball->setFillColor(sf::Color::White);
+    _ball->reset(_window->getSize());
+    _ball->setFillColor(sf::Color::Red);
 
     // create players
-    _player1 = new Paddle(sf::Vector2f(100, 200));
-    _player2 = new Paddle(sf::Vector2f(100, 200));
-    _player2->setPosition(924.f, 0.f);
+    _player1 = new Paddle(sf::Vector2f(_paddleSizeX, _paddleSizeY));
+    _player2 = new Paddle(sf::Vector2f(_paddleSizeX, _paddleSizeY));
+    _player2->setPosition(_window->getSize().x - _paddleSizeX, 0.f);
 
+#if _DEBUG
+    std::cout << "( " << _window->getPosition().x << ", " << _window->getPosition().y << " )" << std::endl;
+#endif
 }
 
 
@@ -57,10 +68,10 @@ void Game::loop()
         render();
         hotkeyListener();
 
-        _window->getSize();
-
-        //_ball->move(0.2f, 0.2f);
-        _ball->move(_window->getSize());
+        if (!_ball->score)
+            _ball->move(_window->getSize(), _player1, _player2);
+        else
+            score();
     }
 }
 
@@ -68,20 +79,30 @@ void Game::hotkeyListener()
 {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        _player1->moveDown();
+        _player1->moveDown(_window->getSize());
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        _player1->moveUp();
+        _player1->moveUp(_window->getSize());
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
-        _player2->moveUp();
+        _player2->moveUp(_window->getSize());
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
-        _player2->moveDown();
+        _player2->moveDown(_window->getSize());
     
 }
 
 void Game::start()
 {
     this->loop();
+}
+
+void Game::score()
+{
+    _ball->reset(_window->getSize());
+    /*
+    std::thread([=]() {
+        std::this_thread::sleep_for(std::chrono::seconds(3))
+    }).join();
+    */
 }

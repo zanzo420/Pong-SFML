@@ -7,6 +7,9 @@
 class Game
 {
 private:
+    const float _paddleSizeX = 50;
+    const float _paddleSizeY = 100;
+
     sf::RenderWindow *_window;
 
     Paddle *_player1;
@@ -25,4 +28,5 @@ public:
     void init();
     void render();
     void start();
+    void score();
 };

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <ctime>
+
 
 class Paddle : public sf::RectangleShape
 {
@@ -9,8 +11,8 @@ private:
 public:
     Paddle(sf::Vector2f size) : RectangleShape(size) {};
 
-    void moveUp();
-    void moveDown();
+    void moveUp(sf::Vector2u);
+    void moveDown(sf::Vector2u);
     void increaseScore();
 };
 
@@ -19,13 +21,20 @@ public:
 class Ball : public sf::CircleShape
 {
 private:
-    float _speedX = 10.f;
-    float _speedY = 10.f;
-
-    void spawn();
+    const float _defaultSpeed = 4.0f;
+    float _speedX = 4.0f;
+    float _speedY = 4.0f;
+    
 public:
-    Ball(float size) : sf::CircleShape(size) {};
+    static bool score;
 
+    Ball(float size) : sf::CircleShape(size) {
+        std::srand(time(NULL));
+        std::rand();
+    };
 
-    void move(sf::Vector2u);
+  
+
+    void reset(sf::Vector2u);
+    void move(sf::Vector2u, Paddle*, Paddle*);
 };
