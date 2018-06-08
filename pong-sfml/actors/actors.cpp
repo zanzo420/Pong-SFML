@@ -27,6 +27,8 @@ void Paddle::increaseScore()
 
 bool Ball::score = false;
 
+int Ball::lastScored = NONE;
+
 // moves the ball
 void Ball::move(sf::Vector2u window, Paddle *player1, Paddle *player2)
 {
@@ -77,7 +79,7 @@ void Ball::move(sf::Vector2u window, Paddle *player1, Paddle *player2)
     {
         this->score = true;
         player1->increaseScore();
-
+        
 #if _DEBUG
         std::cout << "Player 1 Scored" << std::endl;
 #endif
@@ -87,13 +89,21 @@ void Ball::move(sf::Vector2u window, Paddle *player1, Paddle *player2)
 }
 
 
+unsigned int Paddle::getScore()
+{
+    return _score;
+}
 
 void Ball::reset(sf::Vector2u window)
 {
-    int posX = std::rand() % (window.x - 200);
     int posY = std::rand() % (window.y - 200);
 
-    this->setPosition(posX, posY);
+    this->setPosition((window.x / 2), posY);
+
+    int direction = std::rand() % 100;
+
+    if (direction % 2 == 0)
+        this->_speedX *= 1;
 
     this->score = false;
 }

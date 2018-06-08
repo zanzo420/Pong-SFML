@@ -24,6 +24,12 @@
     <ClCompile Include="actors\actors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bin\log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -32,5 +38,14 @@
     <ClInclude Include="actors\actors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bin\log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="The 27 Club.otf" />
   </ItemGroup>
 </Project>

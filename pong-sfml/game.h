@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "actors\actors.h"
+#include "background.h"
 
 class Game
 {
@@ -16,6 +17,8 @@ private:
     Paddle *_player2;
 
     Ball *_ball;
+
+    Background *_background;
 
     int _volley;
 

@@ -136,12 +136,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="actors\actors.cpp" />
+    <ClCompile Include="bin\log.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actors\actors.h" />
+    <ClInclude Include="bin\log.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="background.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="The 27 Club.otf">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </Font>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
